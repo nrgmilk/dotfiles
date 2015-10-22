@@ -239,6 +239,16 @@ if has('printer')
     set printfont=MS_Gothic:h12:cSHIFTJIS
   endif
 endif
+
+" $VIMRUNTIME/syntax/php.vim
+let g:php_baselib       = 1
+let g:php_htmlInStrings = 1
+let g:php_noShortTags   = 1
+let g:php_sql_query     = 1
+
+" $VIMRUNTIME/syntax/sql.vim
+let g:sql_type_default = 'mysql'
+
 "---------------------------------------------------------------------------
 " NeoBundle
 
@@ -256,12 +266,13 @@ NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/neosnippet.vim'
 NeoBundle 'Shougo/neosnippet-snippets'
 NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'othree/html5.vim'
 NeoBundle 'hail2u/vim-css3-syntax'
 NeoBundle 'jelera/vim-javascript-syntax'
-NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'Shougo/vimproc', {'build': {'bsd': 'gmake','mac': 'make' , 'unix': 'gmake',},}
 
 call neobundle#end()
 
@@ -272,7 +283,6 @@ NeoBundleCheck
 
 "---------------------------------------------------------------------------
 " lightline
-
 let g:lightline = {
 			\ 'colorscheme': 'wombat',
 			\ 'mode_map': {'c': 'NORMAL'},
