@@ -1,5 +1,6 @@
 PATH=${HOME}/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin
 export LANG=ja_JP.UTF-8 LC_ALL=ja_JP.UTF-8 EDITOR=vim
+export TERM=xterm
 fpath=(${HOME}/.zshrc.completion $fpath)
 
 #mozc_server_start

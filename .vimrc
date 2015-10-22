@@ -17,7 +17,7 @@ if has('unix') && !has('gui_running')
   if uname =~? "linux"
     set term=builtin_linux
   elseif uname =~? "freebsd"
-    set term=builtin_cons25
+    set term=builtin_xterm
   elseif uname =~? "Darwin"
     set term=builtin_xterm
   else
