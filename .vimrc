@@ -17,7 +17,7 @@ if has('unix') && !has('gui_running')
   if uname =~? "linux"
     set term=builtin_linux
   elseif uname =~? "freebsd"
-    set term=builtin_cons25
+    set term=builtin_xterm
   elseif uname =~? "Darwin"
     set term=builtin_xterm
   else
@@ -25,6 +25,7 @@ if has('unix') && !has('gui_running')
   endif
   unlet uname
 endif
+set t_Co=256
 "------------------------------------------------------------------------------
 " コンソール版で環境変数$DISPLAYが設定されていると起動が遅くなる件へ対応
 if !has('gui_running') && has('xterm_clipboard')
@@ -238,3 +239,97 @@ if has('printer')
     set printfont=MS_Gothic:h12:cSHIFTJIS
   endif
 endif
+"---------------------------------------------------------------------------
+" NeoBundle
+
+if has('vim_starting')
+   " 初回起動時のみruntimepathにneobundleのパスを指定する
+   set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+" NeoBundleを初期化
+call neobundle#begin(expand('~/.vim/bundle/'))
+
+" インストールするプラグインをここに記述
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimfiler'
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'jelera/vim-javascript-syntax'
+NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'scrooloose/nerdtree'
+
+call neobundle#end()
+
+" ファイルタイプ別のプラグイン/インデントを有効にする
+filetype plugin indent on
+
+NeoBundleCheck
+
+"---------------------------------------------------------------------------
+" lightline
+
+let g:lightline = {
+			\ 'colorscheme': 'wombat',
+			\ 'mode_map': {'c': 'NORMAL'},
+			\ 'active': {
+			\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+			\ },
+			\ 'component_function': {
+			\   'modified': 'LightLineModified',
+			\   'readonly': 'LightLineReadonly',
+			\   'fugitive': 'LightLineFugitive',
+			\   'filename': 'LightLineFilename',
+			\   'fileformat': 'LightLineFileformat',
+			\   'filetype': 'LightLineFiletype',
+			\   'fileencoding': 'LightLineFileencoding',
+			\   'mode': 'LightLineMode'
+			\ }
+			\ }
+
+function! LightLineModified()
+	return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightLineReadonly()
+	return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+endfunction
+
+function! LightLineFilename()
+	return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+				\ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+				\  &ft == 'unite' ? unite#get_status_string() :
+				\  &ft == 'vimshell' ? vimshell#get_status_string() :
+				\ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+				\ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+function! LightLineFugitive()
+	try
+		if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+			return fugitive#head()
+		endif
+	catch
+	endtry
+	return ''
+endfunction
+
+function! LightLineFileformat()
+	return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightLineFiletype()
+	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightLineFileencoding()
+	return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! LightLineMode()
+	return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
