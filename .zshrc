@@ -1,4 +1,4 @@
-PATH=${HOME}/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+PATH=${HOME}/bin:/usr/local/sbin:/usr/local/bin:/opt/local/bin:/opt/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin
 export LANG=ja_JP.UTF-8 EDITOR=vim
 fpath=(${HOME}/.zshrc.completion $fpath)
 
