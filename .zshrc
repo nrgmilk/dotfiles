@@ -123,7 +123,7 @@ case `uname -s` in
         alias ll="ls -G -w -al"
         alias top="top -P"
     ;;
-    "darwin")
+    "Darwin")
         alias ls="ls -G -w"
         alias ll="ls -G -w -al"
     ;;

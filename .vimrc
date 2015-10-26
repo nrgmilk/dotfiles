@@ -273,6 +273,12 @@ NeoBundle 'jelera/vim-javascript-syntax'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'Shougo/vimproc', {'build': {'bsd': 'gmake','mac': 'make' , 'unix': 'gmake',},}
+NeoBundle "cohama/vim-hier"
+NeoBundle 'stephpy/vim-php-cs-fixer'
+"NeoBundle "thinca/vim-ref"
+"NeoBundle "thinca/vim-quickrun"
+"NeoBundle "osyo-manga/shabadou.vim"
+"NeoBundle "osyo-manga/vim-watchdogs"
 
 call neobundle#end()
 
@@ -343,3 +349,20 @@ endfunction
 function! LightLineMode()
 	return winwidth(0) > 60 ? lightline#mode() : ''
 endfunction
+
+"vim-ref
+let g:ref_cache_dir     = $HOME .'/.vim/vim-ref/cache'
+let g:ref_phpmanual_path=$HOME .'/.vim/vim-ref/php-chunked-xhtml'
+
+"php-cs-fixer
+" If php-cs-fixer is in $PATH, you don't need to define line below
+let g:php_cs_fixer_path = "~/bin/php-cs-fixer" " define the path to the php-cs-fixer.phar
+let g:php_cs_fixer_level = "symfony"              " which level ?
+let g:php_cs_fixer_config = "default"             " configuration
+let g:php_cs_fixer_php_path = "php"               " Path to PHP
+" If you want to define specific fixers:
+"let g:php_cs_fixer_fixers_list = "linefeed,short_tag,indentation"
+let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
+let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
+let g:php_cs_fixer_verbose = 0                    " Return the output of command if 1, else an
+
