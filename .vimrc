@@ -148,6 +148,8 @@ set nobackup
 "set backupdir=~/backup
 " スワップファイルを作るディレクトリ
 "set directory=~/swap
+" swpを作成しない
+set noswapfile
 
 "------------------------------------------------------------------------------
 "GUI向け
@@ -168,7 +170,7 @@ if has('gui_running')
 	    set ambiwidth=auto
 	  endif
 	elseif has('mac')
-	  set guifont=Osaka－等幅:h14
+	  set guifont=Source\ Han\ Code\ JP
 	elseif has('xfontset')
 	  " UNIX用 (xfontsetを使用)
 	  set guifontset=a14,r14,k14
