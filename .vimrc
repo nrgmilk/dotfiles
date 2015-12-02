@@ -94,10 +94,14 @@ set nowrapscan
 "------------------------------------------------------------------------------
 " タイトルをウインドウ枠に表示する
 set title
-" 行番号を非表示 (number:表示)
+" 行番号を非表示 (number:非表示)
 set nonumber
 " ルーラーを表示 (noruler:非表示)
 set ruler
+" 現在行をハイライト
+set cursorline
+hi clear CursorLine
+hi CursorLine ctermbg=LightBlue
 " タブや改行を表示 (list:表示)
 set nolist
 " どの文字でタブや改行を表示するかを設定
